@@ -10,6 +10,7 @@
           pOutDir  Char(128);
         End-Pi;
         
+        Dcl-S CmdStr  Varchar(256);
         Dcl-S DirName Varchar(128);
         Dcl-S MbrCnt  Int(5);
         Dcl-S IterNum Int(5);
@@ -28,6 +29,21 @@
             LmType = Utils_Lower(LmType);
             
             Dsply ('   ' + %TrimR(LmMember) + '.' + %TrimR(LmType));
+            CmdStr = 'CPYTOSTMF FROMMBR('''
+                     + '/QSYS.lib/'
+                     + %TrimR(pLibrary) + '.lib/'
+                     + %TrimR(pSRCPF) + '.file/'
+                     + %TrimR(LmMember) + '.mbr'') '
+                   + 'TOSTMF('''
+                     + DirName + %TrimR(LmMember) + '.'
+                      + %TrimR(LmType) + ''') '
+                   + 'STMFOPT(*REPLACE) STMFCCSID(1208)';
+                   
+            If (system(CmdStr) = 1);
+              Dsply ('Failed to copy ' 
+                     + %TrimR(LmMember) + '.' + %TrimR(LmType));
+            Endif;
+                    
           Endfor;
         
         Else;
