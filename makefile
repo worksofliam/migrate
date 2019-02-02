@@ -1,7 +1,7 @@
 DBGVIEW=*NONE
 BIN_LIB=MIGRATE
 
-all: clean $(BIN_LIB).lib migsrcpf.pgm
+all: clean $(BIN_LIB).lib migsrcpf.pgm migsrcpf.cmd
 
 migsrcpf.pgm: migsrcpf.rpgle member.rpgle utils.sqlrpgle
 
@@ -17,6 +17,11 @@ migsrcpf.pgm: migsrcpf.rpgle member.rpgle utils.sqlrpgle
 
 %.sqlrpgle:
 	system "CRTSQLRPGI OBJ($(BIN_LIB)/$*) SRCSTMF('./src/$*.sqlrpgle') COMMIT(*NONE) OBJTYPE(*MODULE) DBGVIEW($(DBGVIEW))"
+
+%.cmd:
+	-system -qi "CRTSRCPF FILE($(BIN_LIB)/QCMDSRC) RCDLEN(112)"
+	system "CPYFRMSTMF FROMSTMF('./src/$*.cmd') TOMBR('/QSYS.lib/$(BIN_LIB).lib/QCMDSRC.file/$*.mbr') MBROPT(*ADD)"
+	system "CRTCMD CMD($(BIN_LIB)/$*) PGM($(BIN_LIB)/$*) SRCFILE($(BIN_LIB)/QCMDSRC)"
 
 clean:
 	-system "CLRLIB $(BIN_LIB)"

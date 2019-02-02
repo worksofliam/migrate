@@ -10,21 +10,30 @@
           pOutDir  Char(128);
         End-Pi;
         
+        Dcl-S DirName Varchar(128);
         Dcl-S MbrCnt  Int(5);
         Dcl-S IterNum Int(5);
         
-        //TODO: make member and type lowercase
         //TODO: CPYTOSTMF
         
-        MbrCnt = Mbrs_List(pLibrary:pSRCPF);
-        Dsply ('Member count: ' + %Char(MbrCnt));
+        DirName = %TrimR(pOutDir) + '/' +  %TrimR(Utils_Lower(pSRCPF)) + '/';
+        If (system('MKDIR DIR(''' + DirName + ''')') = 0);
         
-        For Iternum = 1 to MbrCnt;
-          ListDS = Mbrs_Next();
-          LmMember = Utils_Lower(LmMember);
-          LmType = Utils_Lower(LmType);
+          MbrCnt = Mbrs_List(pLibrary:pSRCPF);
+          Dsply ('Member count: ' + %Char(MbrCnt));
           
-          Dsply ('   ' + %TrimR(LmMember) + '.' + %TrimR(LmType));
-        Endfor;
+          For Iternum = 1 to MbrCnt;
+            ListDS = Mbrs_Next();
+            LmMember = Utils_Lower(LmMember);
+            LmType = Utils_Lower(LmType);
+            
+            Dsply ('   ' + %TrimR(LmMember) + '.' + %TrimR(LmType));
+          Endfor;
+        
+        Else;
+          
+          Dsply ('Directory may already exist.');
+        
+        Endif;
         
         Return;
