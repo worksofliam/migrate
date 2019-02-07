@@ -15,8 +15,6 @@
         Dcl-S MbrCnt  Int(5);
         Dcl-S IterNum Int(5);
         
-        //TODO: CPYTOSTMF
-        
         DirName = %TrimR(pOutDir) + '/' +  %TrimR(Utils_Lower(pSRCPF)) + '/';
         If (system('MKDIR DIR(''' + DirName + ''')') = 0);
         
@@ -39,6 +37,7 @@
                       + %TrimR(LmType) + ''') '
                    + 'STMFOPT(*REPLACE) STMFCCSID(1208)';
                    
+            //If fails, display error
             If (system(CmdStr) = 1);
               Dsply ('Failed to copy ' 
                      + %TrimR(LmMember) + '.' + %TrimR(LmType));
