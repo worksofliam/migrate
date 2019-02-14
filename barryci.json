@@ -2,5 +2,12 @@
   "build": [{
     "command": "gmake",
     "args": ["BIN_LIB=MIGRATE"]
-  }]
+  }],
+  "release": {
+    "post_commands": [{
+      "command": "gmake",
+      "args": ["release", "BIN_LIB=MIGRATE"]
+    }],
+    "upload_file": "./release/release.savf"
+  }
 }
