@@ -25,3 +25,21 @@ migsrcpf.pgm: migsrcpf.rpgle member.rpgle utils.sqlrpgle
 
 clean:
 	-system "CLRLIB $(BIN_LIB)"
+	
+release:
+	@echo " -- Creating release. --"
+	@echo " -- Creating save file. --"
+	system "CRTSAVF FILE($(BIN_LIB)/RELEASE)"
+	system "SAVLIB LIB($(BIN_LIB)) DEV(*SAVF) SAVF($(BIN_LIB)/RELEASE) OMITOBJ((RELEASE *FILE))"
+	-rm -r release
+	-mkdir release
+	system "CPYTOSTMF FROMMBR('/QSYS.lib/$(BIN_LIB).lib/RELEASE.FILE') TOSTMF('./release/release.savf') STMFOPT(*REPLACE) STMFCCSID(1252) CVTDTA(*NONE)"
+	@echo " -- Cleaning up... --"
+	system "DLTOBJ OBJ($(BIN_LIB)/RELEASE) OBJTYPE(*FILE)"
+	@echo " -- Release created! --"
+	@echo ""
+	@echo "To install the release, run:"
+	@echo "  > CRTLIB $(BIN_LIB)"
+	@echo "  > CPYFRMSTMF FROMSTMF('./release/release.savf') TOMBR('/QSYS.lib/$(BIN_LIB).lib/RELEASE.FILE') MBROPT(*REPLACE) CVTDTA(*NONE)"
+	@echo "  > RSTLIB SAVLIB($(BIN_LIB)) DEV(*SAVF) SAVF($(BIN_LIB)/RELEASE)"
+	@echo ""
