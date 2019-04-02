@@ -1,4 +1,3 @@
-        //No **FREE
         
         /INCLUDE './headers/utils.rpgle'
         /INCLUDE './headers/std.rpgle'
