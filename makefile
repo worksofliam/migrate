@@ -1,6 +1,8 @@
 DBGVIEW=*NONE
 BIN_LIB=MIGRATE
 
+# Makefile for migrate project
+
 all: clean $(BIN_LIB).lib migsrcpf.pgm migsrcpf.cmd
 
 migsrcpf.pgm: migsrcpf.rpgle member.rpgle utils.sqlrpgle
