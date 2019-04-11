@@ -25,6 +25,7 @@
             LmMember = Utils_Lower(LmMember);
             LmType = Utils_Lower(LmType);
             
+            //Attempt to copy member to streamfile
             Dsply ('   ' + %TrimR(LmMember) + '.' + %TrimR(LmType));
             CmdStr = 'CPYTOSTMF FROMMBR('''
                      + '/QSYS.lib/'
