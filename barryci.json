@@ -4,10 +4,10 @@
     "args": ["BIN_LIB=MIGRATE&branch-short"]
   }],
   "release": {
+    "do_build": false,
     "post_commands": [{
       "command": "gmake",
-      "args": ["release", "BIN_LIB=MIGRATE"]
-    }],
-    "upload_file": "./release/release.savf"
+      "args": ["BIN_LIB=MIGRATE"]
+    }]
   }
 }
