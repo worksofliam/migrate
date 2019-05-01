@@ -14,6 +14,8 @@
         Dcl-S MbrCnt  Int(5);
         Dcl-S IterNum Int(5);
         
+        Dsply ('This change came from cool branch');
+
         DirName = %TrimR(pOutDir) + '/' +  %TrimR(Utils_Lower(pSRCPF)) + '/';
         If (system('MKDIR DIR(''' + DirName + ''')') = 0);
         
