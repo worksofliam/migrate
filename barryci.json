@@ -1,7 +1,7 @@
 {
   "build": [{
     "command": "gmake",
-    "args": ["BIN_LIB=MIGRATE"]
+    "args": ["BIN_LIB=MIGRATE&branch-short"]
   }],
   "release": {
     "post_commands": [{
