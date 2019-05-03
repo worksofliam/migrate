@@ -37,7 +37,7 @@
                    + 'TOSTMF('''
                      + DirName + %TrimR(LmMember) + '.'
                       + %TrimR(LmType) + ''') '
-                   + 'STMFOPT(*REPLACE) STMFCCSID(1252)';
+                   + 'STMFOPT(*REPLACE) STMFCCSID(1252) ENDLINFMT(*LF)';
                    
             //If fails, display error
             If (system(CmdStr) = 1);
