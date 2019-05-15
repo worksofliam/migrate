@@ -6,13 +6,10 @@
   "release": {
     "do_build": false,
     "post_commands": [
-    {
-      "command": "gmake",
-      "args": ["-B", "BIN_LIB=MIGRATE_T"]
-    },
-    {
-      "command": "gmake",
-      "args": ["BIN_LIB=MIGRATE"]
-    }]
+      {
+        "command": "gmake",
+        "args": ["BIN_LIB=MIGRATE"]
+      }
+    ]
   }
 }
