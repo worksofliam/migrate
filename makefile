@@ -1,5 +1,5 @@
 DBGVIEW=*NONE
-BIN_LIB=DEVSAU
+BIN_LIB=MIGRATE
 
 # Makefile for migrate project
 
