@@ -1,6 +1,6 @@
 DBGVIEW=*NONE
 BIN_LIB=MIGRATE
-CCSID=1144
+CCSID=*JOB
 
 # Makefile for migrate project
 
