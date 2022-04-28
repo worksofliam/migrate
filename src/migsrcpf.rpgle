@@ -8,12 +8,14 @@
           pSRCPF   Char(10);
           pOutDir  Char(128);
           pCCSID   Char(10);
+          pAspDev  Char(10);
         End-Pi;
         
         Dcl-S CmdStr  Varchar(256);
         Dcl-S DirName Varchar(128);
         Dcl-S MbrCnt  Int(5);
         Dcl-S IterNum Int(5);
+        Dcl-S basePath Varchar(10);
 
         DirName = %TrimR(pOutDir) + '/' +  %TrimR(Utils_Lower(pSRCPF)) + '/';
         If (system('MKDIR DIR(''' + DirName + ''')') <> 0);
@@ -25,6 +27,11 @@
         MbrCnt = Mbrs_List(pLibrary:pSRCPF);
         Dsply ('Member count: ' + %Char(MbrCnt));
         
+        clear basePath;
+        if pAspDev <> '*SYSBAS';
+          basePath = '/' + %trim(pAspDev);
+        endif;
+        
         For Iternum = 1 to MbrCnt;
           ListDS = Mbrs_Next();
           LmMember = Utils_Lower(LmMember);
@@ -33,6 +40,7 @@
           //Attempt to copy member to streamfile
           //Dsply ('   ' + %TrimR(LmMember) + '.' + %TrimR(LmType));
           CmdStr = 'CPYTOSTMF FROMMBR('''
+                   + %trim(basePath)
                    + '/QSYS.lib/'
                    + %TrimR(pLibrary) + '.lib/'
                    + %TrimR(pSRCPF) + '.file/'

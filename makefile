@@ -1,5 +1,6 @@
 DBGVIEW=*NONE
 BIN_LIB=MIGRATE
+CCSID=1144
 
 # Makefile for migrate project
 
@@ -17,11 +18,11 @@ migsrcpf.pgm: migsrcpf.rpgle member.rpgle utils.sqlrpgle
 	@touch $@
 
 %.rpgle: src/%.rpgle
-	system "CRTRPGMOD MODULE($(BIN_LIB)/$*) SRCSTMF('$<') DBGVIEW($(DBGVIEW))"
+	system "CRTRPGMOD MODULE($(BIN_LIB)/$*) SRCSTMF('$<') DBGVIEW($(DBGVIEW)) TGTCCSID($(CCSID))"
 	@touch $@
 
 %.sqlrpgle: src/%.sqlrpgle
-	system "CRTSQLRPGI OBJ($(BIN_LIB)/$*) SRCSTMF('$<') COMMIT(*NONE) OBJTYPE(*MODULE) DBGVIEW($(DBGVIEW))"
+	system "CRTSQLRPGI OBJ($(BIN_LIB)/$*) SRCSTMF('$<') COMMIT(*NONE) OBJTYPE(*MODULE) DBGVIEW($(DBGVIEW)) CVTCCSID($(CCSID))"
 	@touch $@
 
 %.cmd: src/%.cmd

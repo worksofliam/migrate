@@ -8,3 +8,5 @@
                         PROMPT('Output Directory') ALWUNPRT(*NO) 
              PARM       KWD(CCSID) TYPE(*CHAR) LEN(10)  +
                         PROMPT('CCSID') ALWUNPRT(*NO) DFT(1252) 
+             PARM       KWD(ASPDEV) TYPE(*NAME) LEN(10) +
+                        DFT(*SYSBAS) SPCVAL((*SYSBAS)) PROMPT('ASP Device')
