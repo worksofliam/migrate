@@ -5,7 +5,7 @@ BIN_LIB=MIGRATE
 
 all: $(BIN_LIB).lib migsrcpf.pgm migsrcpf.cmd
 
-migsrcpf.pgm: migsrcpf.rpgle member.rpgle utils.sqlrpgle
+migsrcpf.pgm: migsrcpf.rpgle member.rpgle utils.sqlrpgle library.rpgle
 
 %.lib:
 	-system -q "CRTLIB $*"
