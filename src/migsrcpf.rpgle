@@ -2,6 +2,7 @@
         /INCLUDE './headers/utils.rpgle'
         /INCLUDE './headers/std.rpgle'
         /INCLUDE './headers/member.rpgle'
+        /INCLUDE './headers/library.rpgle'
         
         Dcl-Pi MIGSRCPF;
           pLibrary Char(10);
@@ -10,6 +11,7 @@
           pCCSID   Char(10);
         End-Pi;
         
+        Dcl-S ASP_Prefix Char(10);
         Dcl-S CmdStr  Varchar(256);
         Dcl-S DirName Varchar(128);
         Dcl-S MbrCnt  Int(5);
@@ -30,9 +32,15 @@
           LmMember = Utils_Lower(LmMember);
           LmType = Utils_Lower(LmType);
           
+          ASP_Prefix = GetObjAsp('*LIBL':pLibrary:'*LIB');
+          If ASP_Prefix <> *BLANKS;
+            ASP_Prefix = '/' + ASP_Prefix;
+          Endif;
+
           //Attempt to copy member to streamfile
           //Dsply ('   ' + %TrimR(LmMember) + '.' + %TrimR(LmType));
           CmdStr = 'CPYTOSTMF FROMMBR('''
+                   + %TrimR(ASP_Prefix)
                    + '/QSYS.lib/'
                    + %TrimR(pLibrary) + '.lib/'
                    + %TrimR(pSRCPF) + '.file/'
