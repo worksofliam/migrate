@@ -16,12 +16,13 @@ migsrcpf.pgm: migsrcpf.rpgle member.rpgle utils.sqlrpgle library.rpgle
 	system "CRTPGM PGM($(BIN_LIB)/$*) MODULE($(modules))"
 	@touch $@
 
-%.rpgle: src/%.rpgle
+%.rpgle: src/%.rpgle	
 	system -s "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1252)"
 	system "CRTRPGMOD MODULE($(BIN_LIB)/$*) SRCSTMF('$<') DBGVIEW($(DBGVIEW))"
 	@touch $@
 
 %.sqlrpgle: src/%.sqlrpgle
+	system -s "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1252)"
 	system "CRTSQLRPGI OBJ($(BIN_LIB)/$*) SRCSTMF('$<') COMMIT(*NONE) OBJTYPE(*MODULE) DBGVIEW($(DBGVIEW))"
 	@touch $@
 
