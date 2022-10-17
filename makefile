@@ -17,6 +17,7 @@ migsrcpf.pgm: migsrcpf.rpgle member.rpgle utils.sqlrpgle library.rpgle
 	@touch $@
 
 %.rpgle: src/%.rpgle
+	system -s "CHGATR OBJ('$<') ATR(*CCSID) VALUE(1252)"
 	system "CRTRPGMOD MODULE($(BIN_LIB)/$*) SRCSTMF('$<') DBGVIEW($(DBGVIEW))"
 	@touch $@
 
